@@ -1,114 +1,129 @@
-🔐 Python Strong Password Validator
+# 🔐 Python Strong Password Validator
 
-This mini-project contains a Python script that validates passwords based on a set of strict rules. It was originally created for an NLP course assignment, but it’s also a good hands-on exercise for regex, input parsing, and basic validation logic.
+This mini-project contains a Python script that validates passwords based on a set of strict rules.  
+It reads multiple username/password pairs and prints `"valid"` or `"invalid"` for each.
 
-The program reads multiple username/password pairs and prints "valid" or "invalid" for each.
+The solution uses Python’s built-in **`re`** (regular expressions) module.
 
-The solution uses Python’s built-in re (regular expressions) module to perform fast and efficient validation.
+---
 
-✅ Password Rules
+## ✅ Password Rules
 
-A password is considered valid only if it satisfies all the rules below:
+A password is valid **only if all** the following conditions are met:
 
-Minimum length: 6 characters
+- **Minimum length:** 6 characters  
+- **Maximum length:** 12 characters  
+- **Lowercase requirement:** at least one `[a-z]`  
+- **Uppercase requirement:** at least one `[A-Z]`  
+- **Digit requirement:** at least one `[0-9]`  
+- **Username exclusion:**  
+  - Password must **NOT** contain the username  
+  - Check must be **case-insensitive**
 
-Maximum length: 12 characters
+---
 
-Lowercase requirement: At least one [a-z]
+## 🧠 How the Code Works (`With_regex.py`)
 
-Uppercase requirement: At least one [A-Z]
+The program has two main components:
 
-Digit requirement: At least one [0-9]
+---
 
-Username exclusion:
+### 1. `is_valid_password(username, password)`
 
-The password must NOT contain the username
+This function validates a single password based on the rules.
 
-Comparison is case-insensitive
+#### **Step 1 — Regex Validation (Rules 1–5)**
 
-🧠 How the Code Works (password_validator.py)
+It uses the following regex:
 
-The script is organized into two main components.
-
-1. is_valid_password(username, password)
-
-This function receives a username and password, then returns True or False.
-
-Step 1 — Regex Validation (Rules 1–5)
-
-The function uses the following single regex pattern:
-
+```python
 pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,12}$"
+```
 
-Pattern Breakdown
 
-^ and $ → match the start and end of the string
 
-(?=.*[a-z]) → at least one lowercase letter
 
-(?=.*[A-Z]) → at least one uppercase letter
+#### Pattern Breakdown
 
-(?=.*\d) → at least one digit
+- ^ and $ — start/end of the string
 
-.{6,12} → overall length between 6 and 12 characters
+- (?=.*[a-z]) — at least one lowercase letter
 
-If the password fails this pattern match, the function returns False immediately.
+- (?=.*[A-Z]) — at least one uppercase letter
 
-Step 2 — Username Check (Rule 6)
+- (?=.*\d) — at least one digit
 
-After the regex passes, the validator ensures the password doesn't contain the username:
+- .{6,12} — length 6 to 12 characters
 
+If the regex check fails → return False.
+
+
+### Step 2 — Username Check (Rule 6)
+```python
 if username.lower() in password.lower():
     return False
+```
 
 
-This guarantees a case-insensitive match.
-If the username appears anywhere in the password, it is invalid.
+- This ensures the username does not appear anywhere in the password.
 
-If all checks pass → the function returns True.
+- The check is case-insensitive.
 
-2. main()
-
-This is the execution workflow:
-
-Reads an integer n (number of credential pairs)
-
-Loops n times
-
-For each loop:
-
-Reads a username (line 1)
-
-Reads a password (line 2)
-
-Validates using is_valid_password()
-
-Stores "valid" or "invalid"
-
-After processing all cases, prints each result on a new line
-
-▶️ How to Run
-
-Save the script as:
-
-password_validator.py
+If all checks pass → return True.
 
 
-Run from your terminal:
 
-python password_validator.py
+### 2. main()
+
+Execution steps:
+
+1. Read an integer n
+
+2. Loop n times
+
+3. For each pair:
+
+- Read username
+
+- Read password
+
+- Validate
+
+- Store "valid" or "invalid"
+
+4. Print results line by line
 
 
-The script will wait for input.
+## ▶️ How to Run
 
-📥 Example
+Save the file as:
+
+```python
+With_regex.py
+```
+
+Run:
+```python
+python With_regex.py
+```
+
+The script will wait for input based on the challenge format.
+
+
+
+## 📥 Example
 Input
+```python
 2
 Omid
 8omid@A9
 sol
 123So@So
+```
 
 Output
+```python
 invalid
 valid
+```
+

@@ -1,0 +1,11 @@
+5
+user
+Abc12
+user
+Abc123456789
+user
+AbcdefGHI
+user
+abcdef123
+user
+myUserPass1
