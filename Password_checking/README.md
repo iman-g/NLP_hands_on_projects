@@ -1,11 +1,40 @@
-Python Strong Password ValidatorThis is a Python script that validates passwords based on a set of specific rules, as required by an NLP course assignment. It reads a number of username/password pairs and prints "valid" or "invalid" for each.This solution uses Python's built-in re (regular expressions) module for efficient validation.The Challenge: Password RulesA valid password must meet all of the following criteria:Minimum Length: 6 charactersMaximum Length: 12 charactersLowercase: At least 1 letter from [a-z]Uppercase: At least 1 letter from [A-Z]Digit: At least 1 number from [0-9]Username Exclusion: Must NOT contain the username (comparison is case-insensitive).How the Code Works (password_validator.py)The script is divided into two main parts:1. is_valid_password(username, password)This function takes the username and password as strings and returns True or False.Step 1: Regex Validation (Rules 1-5)It first checks rules 1-5 using a single regular expression:pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,12}$"
-Let's break down this pattern:^ and $: These are "anchors" that match the start and end of the string, respectively. This ensures the entire password matches the pattern, not just a part of it.(?=.*[a-z]): This is a "positive lookahead." It checks if at least one lowercase letter exists anywhere in the string without "consuming" any characters.(?=.*[A-Z]): A positive lookahead to ensure at least one uppercase letter exists.(?=.*\d): A positive lookahead to ensure at least one digit exists..{6,12}: This is the only part that actually "consumes" characters. It matches any character (.) between 6 and 12 times ({6,12}).The function uses re.match(pattern, password) to check if the password string matches this compiled pattern. If it doesn't, the function immediately returns False.Step 2: Username Check (Rule 6)If the regex check passes, the script performs the final check:if username.lower() in password.lower():
-    return False
-It converts both the username and password to lowercase to ensure the check is case-insensitive, as required by the challenge. If the username is found, it returns False.If all checks pass, the function returns True.2. main()This is the main execution block of the script.It reads an integer n from the first line of input.It then loops n times.Inside the loop, it reads the username (on the first line) and the password (on the second line).It calls is_valid_password() with these two values.It stores "valid" or "invalid" in a results list.After the loop finishes, it prints every item in the results list on a new line.How to RunSave the code as password_validator.py.Run it from your terminal:python password_validator.py
-The script will wait for input. You must provide it in the specified format.ExampleInput (what you type):2
-Omid
-8omid@A9
-sol
-123So@So
-Output (what the script prints):invalid
-valid
+# 🔐 Python Strong Password Validator
+
+This mini-project contains a Python script that validates passwords based on a set of strict rules.  
+It reads multiple username/password pairs and prints `"valid"` or `"invalid"` for each.
+
+The solution uses Python’s built-in **`re`** (regular expressions) module.
+
+---
+
+## ✅ Password Rules
+
+A password is valid **only if all** the following conditions are met:
+
+- **Minimum length:** 6 characters  
+- **Maximum length:** 12 characters  
+- **Lowercase requirement:** at least one `[a-z]`  
+- **Uppercase requirement:** at least one `[A-Z]`  
+- **Digit requirement:** at least one `[0-9]`  
+- **Username exclusion:**  
+  - Password must **NOT** contain the username  
+  - Check must be **case-insensitive**
+
+---
+
+## 🧠 How the Code Works (`password_validator.py`)
+
+The program has two main components:
+
+---
+
+### ### 1. `is_valid_password(username, password)`
+
+This function validates a single password based on the rules.
+
+#### **Step 1 — Regex Validation (Rules 1–5)**
+
+It uses the following regex:
+
+```python
+pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,12}$"
