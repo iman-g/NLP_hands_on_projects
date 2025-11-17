@@ -22,7 +22,7 @@ A password is valid **only if all** the following conditions are met:
 
 ---
 
-## 🧠 How the Code Works (`password_validator.py`)
+## 🧠 How the Code Works (`With_regex.py`)
 
 The program has two main components:
 
@@ -99,12 +99,12 @@ Execution steps:
 Save the file as:
 
 ```python
-password_validator.py
+With_regex.py
 ```
 
 Run:
 ```python
-python password_validator.py
+python With_regex.py
 ```
 
 The script will wait for input based on the challenge format.
