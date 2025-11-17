@@ -28,7 +28,7 @@ The program has two main components:
 
 ---
 
-### ### 1. `is_valid_password(username, password)`
+### 1. `is_valid_password(username, password)`
 
 This function validates a single password based on the rules.
 
@@ -43,16 +43,87 @@ pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,12}$"
 
 
 
-Pattern Breakdown
+#### Pattern Breakdown
 
-^ and $ — start/end of the string
+- ^ and $ — start/end of the string
 
-(?=.*[a-z]) — at least one lowercase letter
+- (?=.*[a-z]) — at least one lowercase letter
 
-(?=.*[A-Z]) — at least one uppercase letter
+- (?=.*[A-Z]) — at least one uppercase letter
 
-(?=.*\d) — at least one digit
+- (?=.*\d) — at least one digit
 
-.{6,12} — length 6 to 12 characters
+- .{6,12} — length 6 to 12 characters
 
 If the regex check fails → return False.
+
+
+### Step 2 — Username Check (Rule 6)
+```python
+if username.lower() in password.lower():
+    return False
+```
+
+
+- This ensures the username does not appear anywhere in the password.
+
+- The check is case-insensitive.
+
+If all checks pass → return True.
+
+
+
+### 2. main()
+
+Execution steps:
+
+1. Read an integer n
+
+2. Loop n times
+
+3. For each pair:
+
+- Read username
+
+- Read password
+
+- Validate
+
+- Store "valid" or "invalid"
+
+4. Print results line by line
+
+
+## ▶️ How to Run
+
+Save the file as:
+
+```python
+password_validator.py
+```
+
+Run:
+```python
+python password_validator.py
+```
+
+The script will wait for input based on the challenge format.
+
+
+
+## 📥 Example
+Input
+```python
+2
+Omid
+8omid@A9
+sol
+123So@So
+```
+
+Output
+```python
+invalid
+valid
+```
+
