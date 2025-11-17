@@ -38,3 +38,21 @@ It uses the following regex:
 
 ```python
 pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,12}$"
+```
+
+
+
+
+Pattern Breakdown
+
+^ and $ — start/end of the string
+
+(?=.*[a-z]) — at least one lowercase letter
+
+(?=.*[A-Z]) — at least one uppercase letter
+
+(?=.*\d) — at least one digit
+
+.{6,12} — length 6 to 12 characters
+
+If the regex check fails → return False.
